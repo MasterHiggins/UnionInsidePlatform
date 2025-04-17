@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tax Records</title>
+    <link rel="stylesheet" href="SiteStyles.css">
+</head>
+<body>
+    <h1>Tax Records for <span id="username-display"></span></h1>
+    <div id="tax-records-container"></div>
+
+    <script src="TaxRecords.js"></script>
+    <script>
+        const params = new URLSearchParams(window.location.search);
+        const username = params.get('username');
+
+        document.getElementById('username-display').textContent = username;
+
+        function displayTaxRecords(username) {
+            const taxRecordsContainer = document.getElementById('tax-records-container');
+            taxRecordsContainer.innerHTML = '';
+
+            const allCollections = [Term0Collection0, Term1Collection1]; //NOTE TO SELF: Change after test data is finished
+
+            allCollections.forEach((collection, index) => {
+                if (collection[username]) {
+                    const userData = collection[username];
+                    const collectionDiv = document.createElement('div');
+                    collectionDiv.innerHTML = `
+                        <h2>Collection Period ${index}</h2>
+                        <p>Claimed: ${userData.claimed}</p>
+                        <p>Income: ${userData.income}</p>
+                        <p>Sales: ${userData.sales}</p>
+                        <p>Individual: ${userData.individual}</p>
+                        <p>Business: ${userData.business}</p>
+                        <p>Taxed: ${userData.taxed}</p>
+                    `;
+                    taxRecordsContainer.appendChild(collectionDiv);
+                }
+            });
+        }
+
+        displayTaxRecords(username);
+    </script>
+</body>
+</html>

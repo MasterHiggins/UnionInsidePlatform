@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Union Government Platform</title>
+    <link rel="stylesheet" href="SiteStyles.css">
+</head>
+<body>
+    <h1>Welcome, <span id="username-display"></span>!</h1>
+
+    <button id="tax-records-button">Tax Records</button>
+    <button id="criminal-records-button">Criminal Records</button>
+
+    <script>
+        const params = new URLSearchParams(window.location.search);
+        const username = params.get('username');
+
+        document.getElementById('username-display').textContent = username;
+
+        document.getElementById('tax-records-button').addEventListener('click', () => {
+            window.location.href = `TaxRecords.html?username=${encodeURIComponent(username)}`;
+        });
+
+        document.getElementById('criminal-records-button').addEventListener('click', () => {
+            window.location.href = `CriminalRecords.html?username=${encodeURIComponent(username)}`;
+        });
+    </script>
+</body>
+</html>
