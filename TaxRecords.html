@@ -10,6 +10,10 @@
     <h1>Tax Records for <span id="username-display"></span></h1>
     <div id="tax-records-container"></div>
 
+    <div class="button-display">
+        <button id="back-button" style="margin-top: 20px;">Back</button>
+    </div>
+
     <script src="TaxRecords.js"></script>
     <script>
         const params = new URLSearchParams(window.location.search);
@@ -21,14 +25,14 @@
             const taxRecordsContainer = document.getElementById('tax-records-container');
             taxRecordsContainer.innerHTML = '';
 
-            const allCollections = [Term0Collection0, Term1Collection1]; //NOTE TO SELF: Change after test data is finished
+            const allCollections = [Term3Collection1]; // NOTE TO SELF: Change after test data is finished
 
             allCollections.forEach((collection, index) => {
                 if (collection[username]) {
                     const userData = collection[username];
                     const collectionDiv = document.createElement('div');
                     collectionDiv.innerHTML = `
-                        <h2>Collection Period ${index}</h2>
+                        <h2>Collection Period ${index + 3}</h2>
                         <p>Claimed: ${userData.claimed}</p>
                         <p>Income: ${userData.income}</p>
                         <p>Sales: ${userData.sales}</p>
@@ -42,6 +46,10 @@
         }
 
         displayTaxRecords(username);
+
+        document.getElementById('back-button').addEventListener('click', () => {
+            window.location.href = `Home.html?username=${encodeURIComponent(username)}`;
+        });
     </script>
 </body>
 </html>

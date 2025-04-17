@@ -6,8 +6,13 @@ document.getElementById('loginForm').addEventListener('submit', function(event) 
 
     const users = [
         { username: 'President', password: 'QWERTY1234567890', security: 'Full' },
-        { username: 'CommitteeMember1', password: 'PLKM1935', security: 'Full' },
-        { username: 'CommitteeMember2', password: 'THGN8362', security: 'Full' },
+        { username: 'Finance Officer', password: 'PLKM1935', security: 'Full' },
+        { username: 'Livestock Officer', password: 'THGN8362', security: 'Full' },
+        { username: 'Northern Officer', password: 'JQNF0295', security: 'Full' },
+        { username: 'Chris', password: '2468', security: 'None' },
+        { username: 'Fisher', password: 'Fishy', security: 'None' },
+        { username: 'Elissa', password: 'DD', security: 'None' },
+        { username: 'Mackenzie', password: 'Rokar', security: 'None' },
         { username: 'John', password: 'John', security: 'None' },
         { username: 'Jane', password: 'Jane', security: 'None' }
     ];

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Criminal Records</title>
+    <link rel="stylesheet" href="SiteStyles.css">
+</head>
+<body>
+    <h1>Criminal Records for <span id="username-display"></span></h1>
+    <div id="criminal-records-container"></div>
+
+    <div class="button-display">
+        <button id="back-button" style="margin-top: 20px;">Back</button>
+    </div>
+
+    <script src="CriminalRecords.js"></script>
+    <script>
+        const params = new URLSearchParams(window.location.search);
+        const username = params.get('username');
+
+        document.getElementById('username-display').textContent = username;
+
+        function displayCriminalRecords(username) {
+            const criminalRecordsContainer = document.getElementById('criminal-records-container');
+            criminalRecordsContainer.innerHTML = '';
+
+            const allCollections = [CriminalRecordsCollection]; // Internal database
+
+            allCollections.forEach((collection) => {
+                if (collection[username]) {
+                    const userData = collection[username];
+                    const recordDiv = document.createElement('div');
+                    recordDiv.innerHTML = `
+                        <h2>Criminal Record</h2>
+                        <p>Offenses: ${userData.offenses}</p>
+                        <p>Fines: ${userData.fines}</p>
+                        <p>Arrests: ${userData.arrests}</p>
+                        <p>Convictions: ${userData.convictions}</p>
+                    `;
+                    criminalRecordsContainer.appendChild(recordDiv);
+                }
+            });
+        }
+
+        displayCriminalRecords(username);
+
+        document.getElementById('back-button').addEventListener('click', () => {
+            window.location.href = `Home.html?username=${encodeURIComponent(username)}`;
+        });
+    </script>
+</body>
+</html>

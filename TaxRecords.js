@@ -35,3 +35,54 @@ const Term1Collection1 = {
         taxed: 13
     }
 };
+
+const Term3Collection1 = {
+    John: {
+        claimed: 5000,
+        income: 100,
+        sales: 120,
+        individual: 340,
+        business: 780,
+        taxed: 1300
+    },
+    Jane: {
+        claimed: 50,
+        income: 1,
+        sales: 1,
+        individual: 3,
+        business: 7,
+        taxed: 13
+    },
+    Chris: {
+        claimed: 0,
+        income: 0,
+        sales: 0,
+        individual: 0,
+        business: 0,
+        taxed: 0
+    },
+    Fisher: {
+        claimed: 0,
+        income: 0,
+        sales: 0,
+        individual: 0,
+        business: 0,
+        taxed: 0
+    },
+    Elissa: {
+        claimed: 0,
+        income: 0,
+        sales: 0,
+        individual: 0,
+        business: 0,
+        taxed: 0
+    },
+    Mackenzie: {
+        claimed: 0,
+        income: 0,
+        sales: 0,
+        individual: 0,
+        business: 0,
+        taxed: 0
+    }
+}

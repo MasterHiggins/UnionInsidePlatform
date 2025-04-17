@@ -7,10 +7,20 @@
     <link rel="stylesheet" href="SiteStyles.css">
 </head>
 <body>
-    <h1>Welcome, <span id="username-display"></span>!</h1>
+    <h1>Welcome, <span id="username-display"></span></h1>
 
-    <button id="tax-records-button">Tax Records</button>
-    <button id="criminal-records-button">Criminal Records</button>
+    <h2>Currently Available Services</h2>
+
+    <div class = "button-display">
+        <button id="tax-records-button">Tax Records</button>
+        <button id="criminal-records-button">Criminal Records</button>
+    </div>
+
+    <br>
+
+    <div class="button-display">
+        <button id="sign-out-button" style="background-color: red;">Sign Out</button>
+    </div>
 
     <script>
         const params = new URLSearchParams(window.location.search);
@@ -24,6 +34,10 @@
 
         document.getElementById('criminal-records-button').addEventListener('click', () => {
             window.location.href = `CriminalRecords.html?username=${encodeURIComponent(username)}`;
+        });
+
+        document.getElementById('sign-out-button').addEventListener('click', () => {
+            window.location.href = 'index.html';
         });
     </script>
 </body>
