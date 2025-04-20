@@ -22,15 +22,45 @@ button {
     flex-direction: row;
     align-items: center;
     justify-content: space-evenly;
-
 }
 
 h1, h2 {
     text-align: center;
-    text-align: center;
 }
+
 p {
     text-align: center;
     background-color: lightgrey;
     padding: 2%;
+}
+
+@media (max-width: 768px) {
+    button {
+        width: 80%; 
+        font-size: 14px;
+    }
+
+    .button-display {
+        flex-direction: column; 
+        gap: 10px;
+    }
+
+    h1, h2 {
+        font-size: 1.5em;
+    }
+}
+
+@media (max-width: 480px) {
+    body {
+        padding: 10px; 
+    }
+
+    h1, h2 {
+        font-size: 1.2em; 
+    }
+
+    button {
+        font-size: 12px;
+        padding: 10px 20px; 
+    }
 }

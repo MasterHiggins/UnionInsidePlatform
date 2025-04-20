@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All Criminal Records</title>
+    <link rel="stylesheet" href="SiteStyles.css">
+</head>
+<body>
+    <h1>All Criminal Records</h1>
+    <div id="criminal-records-container"></div>
+
+    <div class="button-display">
+        <button id="back-button" style="margin-top: 20px;">Back</button>
+    </div>
+
+    <script src="CriminalRecords.js"></script>
+    <script>
+        function displayAllCriminalRecords() {
+            const criminalRecordsContainer = document.getElementById('criminal-records-container');
+            criminalRecordsContainer.innerHTML = '';
+
+            const collection = CriminalRecordsCollection;
+
+            Object.keys(collection).forEach(user => {
+                const userData = collection[user];
+                const recordDiv = document.createElement('div');
+                recordDiv.innerHTML = `
+                    <h3>${user}</h3>
+                    <p>Offenses: ${userData.offenses}</p>
+                    <p>Fines: ${userData.fines}</p>
+                    <p>Arrests: ${userData.arrests}</p>
+                    <p>Convictions: ${userData.convictions}</p>
+                    <hr>
+                `;
+                criminalRecordsContainer.appendChild(recordDiv);
+            });
+        }
+
+        displayAllCriminalRecords();
+
+        document.getElementById('back-button').addEventListener('click', () => {
+            window.location.href = 'Dashboard.html';
+        });
+    </script>
+</body>
+</html>

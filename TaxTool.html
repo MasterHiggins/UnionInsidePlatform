@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tax Tool</title>
+    <link rel="stylesheet" href="SiteStyles.css">
+</head>
+<body>
+    <h1>Government Tax Tool</h1>
+    <div class="input-group">
+        <label for="reference-number">Enter Reference Number:</label>
+        <input type="text" id="reference-number" placeholder="Enter reference number">
+    </div>
+    <button id="decode-button">Decode</button>
+
+    <div id="decoded-tax-details"></div>
+
+    <h2>Modify Tax Details</h2>
+    <div class="input-group">
+        <label for="individual-rate">Individual Tax Rate (%):</label>
+        <input type="number" id="individual-rate" placeholder="Enter new rate" step="0.01">
+    </div>
+    <div class="input-group">
+        <label for="business-rate">Business Tax Rate (%):</label>
+        <input type="number" id="business-rate" placeholder="Enter new rate" step="0.01">
+    </div>
+    <div class="input-group">
+        <label for="sales-rate">Sales Tax Rate (%):</label>
+        <input type="number" id="sales-rate" placeholder="Enter new rate" step="0.01">
+    </div>
+    <div class="input-group">
+        <label for="income-rate">Income Tax Rate (%):</label>
+        <input type="number" id="income-rate" placeholder="Enter new rate" step="0.01">
+    </div>
+    <div class="input-group">
+        <label for="manual-adjustment">Manual Adjustment (Add/Subtract):</label>
+        <input type="number" id="manual-adjustment" placeholder="Enter adjustment amount" step="0.01">
+    </div>
+    <button id="apply-changes-button">Apply Changes</button>
+
+    <h2>Generate New Reference Number</h2>
+    <button id="generate-reference-button">Generate Reference Number</button>
+    <div id="new-reference-number"></div>
+
+    <div class="button-display">
+        <button id="back-button" style="margin-top: 20px;">Back</button>
+    </div>
+
+    <script src="TaxReferenceNumber.js"></script>
+    <script>
+        let decodedData = {};
+
+        document.getElementById('decode-button').addEventListener('click', () => {
+            const referenceNumber = document.getElementById('reference-number').value;
+            decodeReferenceNumber(referenceNumber);
+        });
+
+        document.getElementById('apply-changes-button').addEventListener('click', () => {
+            const individualRate = parseFloat(document.getElementById('individual-rate').value) / 100 || decodedData.individualRate;
+            const businessRate = parseFloat(document.getElementById('business-rate').value) / 100 || decodedData.businessRate;
+            const salesRate = parseFloat(document.getElementById('sales-rate').value) / 100 || decodedData.salesRate;
+            const incomeRate = parseFloat(document.getElementById('income-rate').value) / 100 || decodedData.incomeRate;
+            const manualAdjustment = parseFloat(document.getElementById('manual-adjustment').value) || 0;
+
+            const newTotalTax = (
+                decodedData.individualTax * individualRate +
+                decodedData.businessTax * businessRate +
+                decodedData.salesTax * salesRate +
+                decodedData.incomeTax * incomeRate +
+                decodedData.credit +
+                decodedData.topTax +
+                manualAdjustment
+            ).toFixed(2);
+
+            document.getElementById('decoded-tax-details').innerHTML += `
+                <p><strong>Updated Total Tax Owing/Owed:</strong> ${newTotalTax}</p>
+            `;
+        });
+
+        document.getElementById('generate-reference-button').addEventListener('click', () => {
+            const newReferenceNumber = btoa(
+                `${decodedData.individualTax}-${decodedData.businessTax}-${decodedData.salesTax}-${decodedData.incomeTax}-${decodedData.useAlternateRate}`
+            );
+            document.getElementById('new-reference-number').innerHTML = `
+                <p><strong>New Reference Number:</strong> ${newReferenceNumber}</p>
+            `;
+        });
+
+        document.getElementById('back-button').addEventListener('click', () => {
+            window.location.href = 'Dashboard.html';
+        });
+
+        function decodeReferenceNumber(referenceNumber) {
+            try {
+                const decodedString = atob(referenceNumber);
+                const [individualTax, businessTax, salesTax, incomeTax, useAlternateRate] = decodedString.split('-');
+
+                decodedData = {
+                    individualTax: parseFloat(individualTax),
+                    businessTax: parseFloat(businessTax),
+                    salesTax: parseFloat(salesTax),
+                    incomeTax: parseFloat(incomeTax),
+                    useAlternateRate: useAlternateRate === 'true',
+                    individualRate: useAlternateRate === 'true' ? ALTERNATE_RATE_INDIVIDUAL : STANDARD_RATE_INDIVIDUAL,
+                    businessRate: useAlternateRate === 'true' ? ALTERNATE_RATE_BUSINESS : STANDARD_RATE_BUSINESS,
+                    salesRate: useAlternateRate === 'true' ? ALTERNATE_RATE_SALES : STANDARD_RATE_SALES,
+                    incomeRate: useAlternateRate === 'true' ? ALTERNATE_RATE_INCOME : STANDARD_RATE_INCOME,
+                    credit: useAlternateRate === 'true' ? ALTERNATE_CREDIT : STANDARD_CREDIT,
+                    topTax: 0
+                };
+
+                document.getElementById('decoded-tax-details').innerHTML = `
+                    <p>Individual Tax: ${decodedData.individualTax}</p>
+                    <p>Business Tax: ${decodedData.businessTax}</p>
+                    <p>Sales Tax: ${decodedData.salesTax}</p>
+                    <p>Income Tax: ${decodedData.incomeTax}</p>
+                `;
+            } catch (error) {
+                document.getElementById('decoded-tax-details').innerHTML = `<p>Error decoding reference number. Please check the input.</p>`;
+                console.error("Error decoding reference number:", error);
+            }
+        }
+    </script>
+</body>
+</html>

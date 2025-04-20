@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All Tax Records</title>
+    <link rel="stylesheet" href="SiteStyles.css">
+</head>
+<body>
+    <h1>All Tax Records</h1>
+    <div id="tax-records-container"></div>
+
+    <div class="button-display">
+        <button id="back-button" style="margin-top: 20px;">Back</button>
+    </div>
+
+    <script src="TaxRecords.js"></script>
+    <script>
+        function displayAllTaxRecords() {
+            const taxRecordsContainer = document.getElementById('tax-records-container');
+            taxRecordsContainer.innerHTML = '';
+
+            const allCollections = [Term3Collection1];
+
+            allCollections.forEach((collection, index) => {
+                const collectionDiv = document.createElement('div');
+                collectionDiv.innerHTML = `<h2>Collection Period ${index + 3}</h2>`;
+                Object.keys(collection).forEach(user => {
+                    const userData = collection[user];
+                    collectionDiv.innerHTML += `
+                        <h3>${user}</h3>
+                        <p>Claimed: ${userData.claimed}</p>
+                        <p>Income: ${userData.income}</p>
+                        <p>Sales: ${userData.sales}</p>
+                        <p>Individual: ${userData.individual}</p>
+                        <p>Business: ${userData.business}</p>
+                        <p>Taxed: ${userData.taxed}</p>
+                        <hr>
+                    `;
+                });
+                taxRecordsContainer.appendChild(collectionDiv);
+            });
+        }
+
+        displayAllTaxRecords();
+
+        document.getElementById('back-button').addEventListener('click', () => {
+            window.location.href = 'Dashboard.html';
+        });
+    </script>
+</body>
+</html>

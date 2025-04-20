@@ -9,10 +9,10 @@ document.getElementById('loginForm').addEventListener('submit', function(event) 
         { username: 'Finance Officer', password: 'PLKM1935', security: 'Full' },
         { username: 'Livestock Officer', password: 'THGN8362', security: 'Full' },
         { username: 'Northern Officer', password: 'JQNF0295', security: 'Full' },
-        { username: 'Chris', password: '2468', security: 'None' },
-        { username: 'Michael', password: 'Michael', security: 'None' },
-        { username: 'Elissa', password: 'Elissa', security: 'None' },
-        { username: 'Mackenzie', password: 'Mackenzie', security: 'None' },
+        { username: 'Chris', password: 'Nuggets', security: 'None' },
+        { username: 'Fisher', password: 'Quotesalot', security: 'None' },
+        { username: 'Elissa', password: 'Dyslexia', security: 'None' },
+        { username: 'Mackenzie', password: 'Rokar', security: 'None' },
         { username: 'John', password: 'John', security: 'None' },
         { username: 'Jane', password: 'Jane', security: 'None' }
     ];

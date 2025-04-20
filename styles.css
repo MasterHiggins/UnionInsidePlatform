@@ -61,3 +61,42 @@ button:hover {
     margin-top: 10px;
     font-size: 0.9em;
 }
+
+@media (max-width: 768px) {
+    .login-box {
+        width: 90%; 
+        padding: 15px;
+    }
+
+    h2 {
+        font-size: 1.5em; 
+    }
+
+    input {
+        padding: 6px; 
+    }
+
+    button {
+        font-size: 14px; 
+    }
+}
+
+@media (max-width: 480px) {
+    .login-box {
+        width: 100%; 
+        padding: 10px;
+    }
+
+    h2 {
+        font-size: 1.2em; 
+    }
+
+    input {
+        padding: 5px;
+    }
+
+    button {
+        font-size: 12px;
+        padding: 8px;
+    }
+}

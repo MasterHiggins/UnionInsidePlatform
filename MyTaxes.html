@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Taxes</title>
+    <link rel="stylesheet" href="SiteStyles.css">
+</head>
+<body>
+    <h1>Decode Your Tax Reference Number</h1>
+    <div class="input-group">
+        <label for="reference-number">Enter Reference Number:</label>
+        <input type="text" id="reference-number" placeholder="Enter your reference number">
+    </div>
+    <button id="decode-button">Decode</button>
+
+    <div id="decoded-tax-details"></div>
+
+    <div class="button-display">
+        <button id="back-button" style="margin-top: 20px;">Back</button>
+    </div>
+
+    <script src="TaxReferenceNumber.js"></script>
+    <script>
+        document.getElementById('decode-button').addEventListener('click', () => {
+            const referenceNumber = document.getElementById('reference-number').value;
+            decodeReferenceNumber(referenceNumber);
+        });
+
+        document.getElementById('back-button').addEventListener('click', () => {
+            window.location.href = 'Home.html';
+        });
+    </script>
+</body>
+</html>
